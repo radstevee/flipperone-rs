@@ -1,12 +1,11 @@
 use flipperone_rs::{can_tab_complete, count_chars_until_newline_backwards, current_line_drawing_width, draw_smooth_rounded_rect_lines, draw_text_with_colors, text_subtext, BLINK_TIME, GRID_SPACING, GRID_THICKNESS, NAVIGATION_BUTTON_SIZE, ROUNDNESS, SEGMENTS, SMOOTHING, SUBTITLE, TEXT_SIZE, TEXT_SPACING};
 use raylib::color::Color;
 use raylib::consts::{KeyboardKey, MouseButton};
+use raylib::drawing::RaylibDraw;
 use raylib::math::{Rectangle, Vector2};
 use raylib::text::RaylibFont;
 use std::error::Error;
-use raylib::drawing::RaylibDraw;
 
-pub mod button;
 pub mod main_menu;
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -14,13 +13,13 @@ fn main() -> Result<(), Box<dyn Error>> {
         .size(1280, 720)
         .title("FLIPPERONE")
         .build();
-    
+
     ray.set_target_fps(60);
 
     let default_font = ray.get_font_default();
     let custom_font = ray.load_font(&thread, "fonts/haxrcorp-4089.ttf")?;
     let mut subtitle;
-    let mut frames= 0i64;
+    let mut frames = 0i64;
     let button_text = "LOGS";
 
     // let text_box_color = Color::new(30, 30, 30, 255);
@@ -289,7 +288,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             draw.draw_rectangle_rounded(rect, ROUNDNESS, SEGMENTS, background_color);
 
             main_menu::draw_background_grid(draw, &rect, GRID_SPACING, GRID_THICKNESS, &grid_color);
-            
+
             subtitle = text_subtext(SUBTITLE.to_string(), 0, (frames / 10) as i32);
 
             draw.draw_rectangle_rec(text_box, Color::BLACK);
@@ -306,7 +305,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                     20.0,
                     &default_font,
                     Color::WHITE,
-                    outline_color
+                    outline_color,
                 );
 
                 y_offset += line_height;
@@ -318,7 +317,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                     cursor_y as i32,
                     cursor_x as i32,
                     cursor_y as i32 + 20,
-                    text_color
+                    text_color,
                 );
             }
 
@@ -328,25 +327,25 @@ fn main() -> Result<(), Box<dyn Error>> {
                 text_pos,
                 TEXT_SIZE,
                 TEXT_SPACING,
-                outline_color
+                outline_color,
             );
 
             if clicked {
                 draw.draw_rectangle_rec(
                     button_rect,
-                    Color::new(255, 165, 0, 255)
+                    Color::new(255, 165, 0, 255),
                 );
             } else if hovered {
                 draw.draw_rectangle_rec(
                     button_rect,
-                    Color::new(255, 165, 0, 50)
+                    Color::new(255, 165, 0, 50),
                 );
             }
 
             draw.draw_rectangle_lines_ex(
                 button_rect,
                 2.0,
-                outline_color
+                outline_color,
             );
 
             main_menu::draw_top_bar(mouse_pos, draw, &custom_font, subtitle, minimize_button, maximize_button, close_button, outline_color);
