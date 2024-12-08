@@ -1,0 +1,11 @@
+[package]
+name = "flipperone-rs"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rand = { version = "0.8.5", features = ["small_rng"] }
+raylib = "5.0.2"
+tree-sitter = "0.24.4"
+tree-sitter-c = "0.23.2"
+tree-sitter-highlight = "0.24.4"
